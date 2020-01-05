@@ -2,7 +2,7 @@
 
 This project was bootstrap with `rucksack` and out of the box contains all the necessary things to run and develop web service application.
 
-One of it's main goals and benefits is being completely virtual. It means that we are trying to run as much of a job as we can in Docker containers making you to install minimal dependecies into your computer. For now it's only Ruby you have to install. Recomended version is `2.6.5` but it should work with other versions itself. You can use [rbenv](https://github.com/rbenv/rbenv) or any other version management sofware to install proper version of Ruby on your machine.
+One of the main goals and benefits of our apporach is being completely virtual. It means that we are trying to run as much of a job as we can in Docker containers making you to install minimal dependecies into your computer. For now it's only Ruby you have to install. Recomended version is `2.6.5` but it should work with other versions itself. You can use [rbenv](https://github.com/rbenv/rbenv) or any other version management sofware to install proper version of Ruby on your machine.
 
 ## Running
 
