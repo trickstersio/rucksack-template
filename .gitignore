@@ -1,5 +1,10 @@
+/.bundle
+/.psqlrc
 /log/
-/tmp/
+# /tmp/
+
+!/log/.keep
+!/tmp/.keep
 
 .DS_Store
 .byebug_history
