@@ -1,0 +1,104 @@
+version: '3'
+services:
+  app: &app
+    tmpfs:
+      - /tmp
+    build:
+      context: .
+      dockerfile: config/docker/Dockerfile
+
+  backend: &backend
+    <<: *app
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app:cached
+      - runner:/app/tmp/runner
+      - bundle:/usr/local/bundle
+    environment:
+      - APP_ENV=${APP_ENV:-development}
+      - APP_NAME=${APP_NAME:-rucksack}
+      - APP_PORT=${APP_PORT:-5000}
+      - RACK_ENV=${APP_ENV:-development}
+      - SESSION_SECRET=cdecaf889023b60a5b50fc670067f31621bd989f98afe1627a5fea693e79b1bf1252b
+      - DB_HOST=postgres
+      - DB_DATABASE=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - FAKTORY_URL=tcp://faktory:7419
+
+  runner:
+    <<: *backend
+    command: tail -f /dev/null
+    depends_on:
+      - postgres
+      - redis
+      - faktory
+
+  api:
+    <<: *backend
+    command: bundle exec puma -C /app/config/puma.rb
+    expose:
+      - 5000
+    depends_on:
+      - postgres
+      - redis
+      - faktory
+
+  clockwork:
+    <<: *backend
+    command: bundle exec clockwork /app/config/clock.rb
+    depends_on:
+      - postgres
+      - redis
+      - faktory
+
+  workers:
+    <<: *backend
+    command: bundle exec faktory-worker -r /app/config/initialize.rb -q ${APP_NAME}
+    depends_on:
+      - postgres
+      - redis
+      - faktory
+
+  faktory:
+    image: contribsys/faktory:latest
+    command: /faktory -b :7419 -w :7420 -e production
+    volumes:
+      - faktory:/var/lib/faktory
+    expose:
+      - 7419
+      - 7420
+
+  redis:
+    image: redis
+    volumes:
+      - redis:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    expose:
+      - 6379
+
+  postgres:
+    image: postgres:12
+    expose:
+      - 5432
+    volumes:
+      - .psqlrc:/root/.psqlrc:ro
+      - postgres:/var/lib/postgresql/data
+      - ./log:/root/log:cached
+    healthcheck:
+      test: pg_isready -U test -p test -h 127.0.0.1
+      interval: 5s
+    environment:
+      - PSQL_HISTFILE=/root/log/.psql_history
+
+volumes:
+  postgres:
+  redis:
+  bundle:
+  faktory:
+  runner:

@@ -1,0 +1,7 @@
+/log/
+/tmp/
+
+.DS_Store
+.byebug_history
+.env
+.env.*
