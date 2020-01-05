@@ -1,7 +1,7 @@
 /.bundle
 /.psqlrc
 /log/
-# /tmp/
+/tmp/
 
 !/log/.keep
 !/tmp/.keep
