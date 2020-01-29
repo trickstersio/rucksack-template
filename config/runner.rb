@@ -6,10 +6,13 @@ require_relative "env"
 class Runner
   class ExecutionFailed < RuntimeError; end
 
+  APP_ENV = ENV.fetch("APP_ENV")
+  APP_NAME = ENV.fetch("APP_NAME")
+
   attr_reader :app_env
   attr_reader :app_name
 
-  def initialize(app_env: ENV.fetch("APP_ENV"), app_name: ENV.fetch("APP_NAME"))
+  def initialize(app_env: APP_ENV, app_name: APP_NAME)
     @app_env = app_env
     @app_name = app_name
     @ready_to_run = false
@@ -92,7 +95,17 @@ class Runner
   end
 
   private def remote(*cmd)
-    local "docker-compose", docker_compose_args, "exec", "runner", *cmd
+    local "docker-compose", docker_compose_args, "exec", docker_compose_exec_args, "runner", *cmd
+  end
+
+  private def docker_compose_exec_args
+    args = []
+    args << "-T" if ci?
+    args.join(" ")
+  end
+
+  private def ci?
+    ENV["GITHUB_ACTIONS"] == "true"
   end
 
   private def local(*args)

@@ -1,4 +1,6 @@
 ENV["BUNDLE_GEMFILE"] ||= File.expand_path("Gemfile", ROOT_PATH)
+
 ENV["APP_ENV"] ||= "development"
 ENV["APP_NAME"] ||= "rucksack"
 ENV["APP_PORT"] ||= "5000"
+ENV["SESSION_SECRET"] ||= "57c31d0673b630214d888aa73b5f0b875273983d26658f060d59f360b2770a04c5a699aa50bd42889d6957f30ae3dc24c2df8ffafdf72de905c27b66915d0d82"

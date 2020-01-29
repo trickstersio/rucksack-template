@@ -16,15 +16,15 @@ services:
       - runner:/app/tmp/runner
       - bundle:/usr/local/bundle
     environment:
-      - APP_ENV=${APP_ENV:-development}
-      - APP_NAME=${APP_NAME:-rucksack}
-      - APP_PORT=${APP_PORT:-5000}
-      - RACK_ENV=${APP_ENV:-development}
-      - SESSION_SECRET=cdecaf889023b60a5b50fc670067f31621bd989f98afe1627a5fea693e79b1bf1252b
+      - APP_ENV=${APP_ENV}
+      - APP_NAME=${APP_NAME}
+      - APP_PORT=${APP_PORT}
+      - RACK_ENV=${APP_ENV}
+      - SESSION_SECRET=${SESSION_SECRET}
       - DB_HOST=postgres
-      - DB_DATABASE=postgres
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=postgres
+      - DB_DATABASE=${APP_NAME}
+      - DB_USERNAME=${APP_NAME}
+      - DB_PASSWORD=${APP_NAME}
       - FAKTORY_URL=tcp://faktory:7419
 
   runner:
@@ -90,11 +90,11 @@ services:
       - .psqlrc:/root/.psqlrc:ro
       - postgres:/var/lib/postgresql/data
       - ./log:/root/log:cached
-    healthcheck:
-      test: pg_isready -U test -p test -h 127.0.0.1
-      interval: 5s
     environment:
       - PSQL_HISTFILE=/root/log/.psql_history
+      - POSTGRES_DB=${APP_NAME}
+      - POSTGRES_USER=${APP_NAME}
+      - POSTGRES_PASSWORD=${APP_NAME}
 
 volumes:
   postgres:
