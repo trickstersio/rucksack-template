@@ -1,13 +1,17 @@
 namespace :db do
   task migrate: :environment do
-    migration_context = ActiveRecord::MigrationContext.new(Application.configuration.database_migrations_path)
+    migrations_paths = [ Application.configuration.database_migrations_path ]
+
+    migration_context = ActiveRecord::MigrationContext.new(migrations_paths, ActiveRecord::Base.connection.schema_migration)
     migration_context.migrate
 
     Rake::Task["db:schema:dump"].invoke
   end
 
   task rollback: :environment do
-    migration_context = ActiveRecord::MigrationContext.new(Application.configuration.database_migrations_path)
+    migrations_paths = [ Application.configuration.database_migrations_path ]
+
+    migration_context = ActiveRecord::MigrationContext.new(migrations_paths, ActiveRecord::Base.connection.schema_migration)
     migration_context.rollback
 
     Rake::Task["db:schema:dump"].invoke
