@@ -38,7 +38,7 @@ Folder `factories` contains all the factories which are used to produce test mod
 
 Folder `api` contains API level tests. They are sending requests to the app, getting response and checking that everything is working as expected. This is our first line of defence. Always start from such kind of a test. Underlying directories are structured in the same way as an API itself. For example, for the endpoint which is handling requests to `POST /operators/login` you can find an approrpiate test located in `/spec/api/operators/login/post_spec.rb`.
 
-We are running all tests inside of Docker Compose environment, so you don't need to install anything on your computer in order to do that: no PostgreSQL running locally, no Redis, no Faktory, nothing. So, in order to runn all tests use following command:
+We are running all tests inside of Docker Compose environment, so you don't need to install anything on your computer in order to do that: no PostgreSQL running locally, no Redis, no Faktory, nothing. So, in order to run all tests use following command:
 
 ```
 bin/test
