@@ -1,8 +1,8 @@
 # Rucksack: Template
 
-This project was bootstrap with `rucksack` and out of the box contains all the necessary things to run and develop web service application.
+This project was bootstrap with [rucksack](https://github.com/trickstersio/rucksack) and out of the box contains all the necessary things to run and develop web service application.
 
-One of the main goals and benefits of our apporach is being completely virtual. It means that we are trying to run as much of a job as we can in Docker containers making you to install minimal dependecies into your computer. For now it's only Ruby you have to install. Recomended version is `2.6.5` but it should work with other versions itself. You can use [rbenv](https://github.com/rbenv/rbenv) or any other version management sofware to install proper version of Ruby on your machine.
+One of the main goals and benefits of our apporach is being completely virtual. It means that we are trying to run as much of a job as we can in Docker containers making you to install minimal dependencies into your computer. For now it's only Ruby you have to install. Recommended version is `2.7.1` but it should work with other versions itself. You can use [rbenv](https://github.com/rbenv/rbenv) or any other version management software to install proper version of Ruby on your machine.
 
 ## Running
 
@@ -12,7 +12,7 @@ In order to run the development environment use this script:
 bin/up
 ```
 
-It'll create and cofigure Docker Compose environment for you. Notice that it's not exposing any ports to the host machine in order to avoid possible conflicts between differrent apps. In order to interact with parts of your application there are 2 possible ways.
+It'll create and configure Docker Compose environment for you. Notice that it's not exposing any ports to the host machine in order to avoid possible conflicts between differrent apps. In order to interact with parts of your application there are 2 possible ways.
 
 The first one is use `runner`. This is up and running ready to use container which allows you to run scripts inside of your envrionment. For example, here is how you can run `curl` and check that your API server is alive:
 
