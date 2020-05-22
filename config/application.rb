@@ -1,7 +1,5 @@
 class Application < Rucksack::Application
   def self.boot(router)
-    ActiveRecord::Migration.check_pending!
-
     @application = Application.new
     @application.router = router
     @application.rack_app

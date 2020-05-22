@@ -12,18 +12,6 @@ class Configuration < Rucksack::Configuration
     @database = init_database_configuration
   end
 
-  def database_migrations_path
-    relative_to_root('db/migrations')
-  end
-
-  def database_schema_path
-    relative_to_root('db/schema.rb')
-  end
-
-  private def relative_to_root(path)
-    Pathname.new(File.expand_path(path, ROOT_PATH))
-  end
-
   private def init_database_configuration
     OpenStruct.new(
       adapter: "postgresql",
