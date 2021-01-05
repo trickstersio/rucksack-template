@@ -1,8 +1,9 @@
 GIT
   remote: https://github.com/trickstersio/rucksack.git
-  revision: 21cd40a7e04d703a9b01b439c9514ff066379705
+  revision: bba120216efad1a5c75501426fa4136bf9d6e9ee
   specs:
     rucksack (0.1.0)
+      rack (>= 2.1.4)
       sinatra (~> 2.0)
       zeitwerk (~> 2.2)
 
@@ -93,7 +94,7 @@ GEM
     rack (2.2.3)
     rack-cors (1.1.0)
       rack (>= 2.0.0)
-    rack-protection (2.0.8.1)
+    rack-protection (2.1.0)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -120,12 +121,12 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
     ruby-progressbar (1.10.1)
-    ruby2_keywords (0.0.1)
+    ruby2_keywords (0.0.2)
     safe_yaml (1.0.5)
-    sinatra (2.0.8.1)
+    sinatra (2.1.0)
       mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
       tilt (~> 2.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -138,7 +139,7 @@ GEM
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zeitwerk (2.3.0)
+    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
